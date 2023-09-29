@@ -1,0 +1,19 @@
+{
+  "name": "snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "lua",
+        "path": "./lua/lua.json"
+      },
+      {
+        "language": "json",
+        "path": "./json/cspell.json"
+      },
+      {
+        "language": "sh",
+        "path": "./sh/bash.json"
+      }
+    ]
+  }
+}

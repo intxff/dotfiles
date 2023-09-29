@@ -1,0 +1,16 @@
+{
+    "customdict": {
+        "prefix": "cd",
+        "body": [
+            "\"dictionaries\": [\"${1:dict_name}\"]",
+            "\"dictionaryDefinitions\": [",
+            "\t{",
+            "\t\t\"name\": \"${1:dict_name}\",",
+            "\t\t\"path\": \"${2:path}\",",
+            "\t\t\"addWords\": true",
+            "\t}",
+            "]"
+        ],
+        "description": "custom dict"
+    }
+}

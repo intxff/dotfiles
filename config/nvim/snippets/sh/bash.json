@@ -1,0 +1,14 @@
+{
+  "customdict": {
+    "prefix": "basic",
+    "body": [
+      "#!/bin/bash",
+      "",
+      "set -o noclobber  # Avoid overlay files (echo \"hi\" > foo)",
+      "set -o errexit    # Used to exit upon error, avoiding cascading errors",
+      "set -o pipefail   # Unveils hidden failures",
+      "set -o nounset    # Exposes unset variables"
+    ],
+    "description": "basic header for bash script"
+  }
+}
