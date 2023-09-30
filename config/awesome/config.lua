@@ -610,7 +610,7 @@ config.rules = {
 config.app = {
 	terminal = {
 		autostart = false,
-		cmd = "alacritty",
+		cmd = "kitty",
 	},
 	rofi = {
 		autostart = false,
