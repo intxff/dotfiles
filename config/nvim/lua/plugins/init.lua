@@ -65,7 +65,7 @@ require("lazy").setup({
 	-- statusline
 	{
 		"nvim-lualine/lualine.nvim",
-		event = "VeryLazy",
+		event = "BufReadPre",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
