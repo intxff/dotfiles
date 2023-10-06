@@ -6,12 +6,12 @@ config.topbar = {
 		battery = "BAT0",
 	},
 	volume = {
-		refresh = 10,
+		refresh = 1,
 		step = 5,
 	},
 	brightness = {
 		device = "amdgpu_bl1",
-		refresh = 10,
+		refresh = 1,
 		step = 5,
 	},
 }
