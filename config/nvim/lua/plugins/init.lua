@@ -76,6 +76,7 @@ require("lazy").setup({
 	-- indent line
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		tag = "v2.20.8",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
