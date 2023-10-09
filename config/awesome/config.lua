@@ -49,7 +49,7 @@ config.keymaps = {
 			description = "restart awesome",
 			group = "awesome",
 		},
-		volumn_toggle_mute = {
+		volume_toggle_mute = {
 			mod = {},
 			key = "XF86AudioMute",
 			press = function()
@@ -58,7 +58,7 @@ config.keymaps = {
 			description = "toggle mute",
 			group = "system",
 		},
-		volumn_toggle_mic_mute = {
+		volume_toggle_mic_mute = {
 			mod = {},
 			key = "XF86AudioMicMute",
 			press = function()
@@ -67,22 +67,35 @@ config.keymaps = {
 			description = "toggle mic mute",
 			group = "system",
 		},
-		volumn_increase = {
+		volume_increase = {
 			mod = {},
 			key = "XF86AudioRaiseVolume",
 			press = function()
-				awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+				local naughty = require("naughty")
+				local cmd = [[bash -c 'pactl get-sink-volume @DEFAULT_SINK@']]
+				awful.spawn.easy_async(cmd, function(stdout, stderr)
+					if stderr ~= nil and stderr ~= "" then
+						naughty.notify({ text = "failed to get current volume" })
+						return
+					end
+					local vol = tonumber(string.match(stdout, "(%d+)%%"))
+					vol = vol + 5
+					if vol > 100 then
+						vol = 100
+					end
+					awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ " .. tostring(vol) .. "%")
+				end)
 			end,
-			description = "increase volumn",
+			description = "increase volume",
 			group = "system",
 		},
-		volumn_decrease = {
+		volume_decrease = {
 			mod = {},
 			key = "XF86AudioLowerVolume",
 			press = function()
 				awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")
 			end,
-			description = "decrease volumn",
+			description = "decrease volume",
 			group = "system",
 		},
 		brightness_increase = {

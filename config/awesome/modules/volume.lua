@@ -32,6 +32,10 @@ local volume = wibox.widget({
 })
 
 function volume:inc(s)
+	local cur = tonumber(pactl.get_volume(device))
+	if cur + tonumber(s) > 100 then
+		s = 100 - cur
+	end
 	pactl.volume_increase(device, s)
 	volume:update_graphic()
 end
