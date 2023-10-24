@@ -49,4 +49,6 @@ require("lspconfig").efm.setup({
 		rootMarkers = { ".git/" },
 		languages = matcher,
 	},
+	capabilities = require("plugins.lsp.common").capabilities,
+	handlers = require("plugins.lsp.common").handlers,
 })

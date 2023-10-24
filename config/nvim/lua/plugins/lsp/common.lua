@@ -3,7 +3,7 @@ vim.diagnostic.config({
 	virtual_text = true,
 	signs = true,
 	underline = true,
-	update_in_insert = false,
+	update_in_insert = true,
 	severity_sort = false,
 })
 
@@ -11,19 +11,6 @@ local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
-}
-
-local language_servers = require("lspconfig").util.available_servers()
-for _, ls in ipairs(language_servers) do
-	require("lspconfig")[ls].setup({
-		capabilities = capabilities,
-	})
 end
 
 -- Global mappings.
@@ -47,6 +34,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 		vim.keymap.set("n", "<space>d", vim.lsp.buf.type_definition, opts)
 		vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, opts)
+		vim.keymap.set("n", "<space>i", function()
+			vim.lsp.inlay_hint(0, nil)
+		end, opts)
 		vim.keymap.set({ "n", "v" }, "<space>c", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
 		vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
@@ -55,3 +45,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, opts)
 	end,
 })
+
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
+
+local handlers = {
+	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
+	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
+}
+
+return { capabilities = capabilities, handlers = handlers }
