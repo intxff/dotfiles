@@ -10,6 +10,8 @@ export RCRC=~/Code/dotfiles/rcrc
 ### gopath
 export GOPATH=~/Code/golang
 export PATH="$PATH:$(go env GOPATH)/bin"
+### Editor
+export EDITOR="nvim"
 
 ### Command history
 export HISTFILE=~/.zsh_history
