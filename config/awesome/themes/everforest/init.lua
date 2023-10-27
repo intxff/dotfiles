@@ -1,7 +1,7 @@
 local theme = {}
 local topbar_text_font = "sans bold 14"
 local topbar_icon_font_size = 17
-local topbar_icon_font = "sans " .. topbar_icon_font_size
+local topbar_icon_font = "monospace " .. topbar_icon_font_size
 local margin_to_align_icon_and_text = 2
 local item_bg = "#212529"
 
@@ -80,7 +80,7 @@ theme.battery = {
 			"󰁹",
 		},
 	},
-	font_icon = "sans " .. topbar_icon_font_size - 5,
+	font_icon = "sans " .. topbar_icon_font_size - 4,
 	font_text = topbar_text_font,
 	margin_to_align_icon_and_text = margin_to_align_icon_and_text,
 	bg = item_bg,
