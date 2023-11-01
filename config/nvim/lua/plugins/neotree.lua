@@ -14,7 +14,7 @@ require("window-picker").setup({
 
 require("neo-tree").setup({
 	close_if_last_window = true,
-	popup_border_style = "solid",
+	popup_border_style = "rounded",
 	source_selector = {
 		winbar = false,
 		statusline = true,
@@ -22,6 +22,17 @@ require("neo-tree").setup({
 	window = {
 		position = "left",
 		width = 30,
+	},
+	popup = {
+		position = { col = "50%", row = "10" },
+		size = function(state)
+			local root_name = vim.fn.fnamemodify(state.path, ":~")
+			local root_len = string.len(root_name) + 4
+			return {
+				width = math.max(root_len, 90),
+				height = vim.o.lines - 20,
+			}
+		end,
 	},
 })
 
