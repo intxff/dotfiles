@@ -16,10 +16,10 @@ cmp.setup({
 	},
 	window = {
 		completion = {
-			border = "single",
+			border = "rounded",
 		},
 		documentation = {
-			border = "single",
+			border = "rounded",
 		},
 	},
 	formatting = {

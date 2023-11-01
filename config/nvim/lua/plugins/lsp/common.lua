@@ -5,6 +5,7 @@ vim.diagnostic.config({
 	underline = true,
 	update_in_insert = true,
 	severity_sort = false,
+	float = { border = "rounded" },
 })
 
 local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = " " }
@@ -53,8 +54,8 @@ capabilities.textDocument.foldingRange = {
 }
 
 local handlers = {
-	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
-	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
+	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
 }
 
 return { capabilities = capabilities, handlers = handlers }
