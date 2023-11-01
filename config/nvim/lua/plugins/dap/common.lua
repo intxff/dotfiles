@@ -1,7 +1,15 @@
+-- change dap signature
+vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "red", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "blue", linehl = "", numhl = "" })
+vim.fn.sign_define("DapStopped", { text = "", texthl = "blue", linehl = "", numhl = "" })
+
 require("dapui").setup()
 ---@diagnostic disable-next-line: different-requires
 local dap = require("dap")
 local dapui = require("dapui")
+
+-- record buf_id when toggle to dap ui
+local cur_buf = 0
 
 -- keymaps
 local keymaps = {
@@ -66,6 +74,10 @@ local keymaps = {
 		"<F12>",
 		function()
 			dapui.close()
+			if cur_buf ~= 0 then
+				vim.api.nvim_win_set_buf(0, cur_buf)
+				cur_buf = 0
+			end
 		end,
 	},
 }
@@ -76,5 +88,6 @@ for _, keymap in pairs(keymaps) do
 end
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
+	cur_buf = vim.api.nvim_win_get_buf(0)
 	dapui.open()
 end
