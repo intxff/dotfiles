@@ -12,6 +12,8 @@ export GOPATH=~/Code/golang
 export PATH="$PATH:$(go env GOPATH)/bin"
 ### Editor
 export EDITOR="nvim"
+### use Emacs keybinding
+bindkey -e
 
 ### Command history
 export HISTFILE=~/.zsh_history
