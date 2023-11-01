@@ -33,7 +33,7 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd([[colorscheme everforest]])
+			require("plugins.everforest")
 		end,
 	},
 	-- fcitx5 switch
@@ -41,7 +41,7 @@ require("lazy").setup({
 	-- tree view of files, buffers, git
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
+		-- "intxff/neo-tree.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
@@ -214,7 +214,7 @@ require("lazy").setup({
 		"stevearc/conform.nvim",
 		enabled = true,
 		event = "VeryLazy",
-		depenencies = {
+		dependencies = {
 			"williamboman/mason.nvim",
 		},
 		config = function()
@@ -272,6 +272,19 @@ require("lazy").setup({
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("plugins.fzf")
+		end,
+	},
+	-- debug
+	{
+		"rcarriga/nvim-dap-ui",
+		event = "VeryLazy",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"williamboman/mason.nvim",
+		},
+		config = function()
+			---@diagnostic disable-next-line: different-requires
+			require("plugins.dap")
 		end,
 	},
 }, {
