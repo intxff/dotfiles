@@ -287,6 +287,18 @@ require("lazy").setup({
 			require("plugins.dap")
 		end,
 	},
+	-- auto maxmize window
+	{
+		"anuvyklack/windows.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"anuvyklack/middleclass",
+			"anuvyklack/animation.nvim",
+		},
+		config = function()
+			require("plugins.windows")
+		end,
+	},
 }, {
 	defaults = {
 		lazy = true,
