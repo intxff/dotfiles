@@ -22,6 +22,7 @@ require("lspconfig").lua_ls.setup({
 		return true
 	end,
 	single_file_support = true,
+	on_attach = require("plugins.lsp.common").on_attach,
 	capabilities = require("plugins.lsp.common").capabilities,
 	handlers = require("plugins.lsp.common").handlers,
 })

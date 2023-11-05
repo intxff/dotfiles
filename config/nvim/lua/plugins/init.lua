@@ -299,6 +299,18 @@ require("lazy").setup({
 			require("plugins.windows")
 		end,
 	},
+	-- flutter
+	{
+		"akinsho/flutter-tools.nvim",
+		lazy = false,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"stevearc/dressing.nvim", -- optional for vim.ui.select
+		},
+		config = function()
+			require("plugins.flutter")
+		end,
+	},
 }, {
 	defaults = {
 		lazy = true,
