@@ -33,9 +33,16 @@ dap.configurations.go = {
 	},
 	{
 		type = "go",
-		name = "Debug (Arguments)",
+		name = "Debug With Arguments",
 		request = "launch",
 		program = "${file}",
 		args = get_arguments,
+	},
+	{
+		type = "go",
+		name = "Attach",
+		request = "attach",
+		mode = "local",
+		processId = require("dap.utils").pick_process,
 	},
 }
