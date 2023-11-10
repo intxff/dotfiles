@@ -1,14 +1,30 @@
+local short_path = function()
+	local win_width = vim.api.nvim_win_get_width(0)
+	local buf_path = vim.fn.expand("%:.")
+	local path_parts = {}
+	for part in string.gmatch(buf_path, "([^/]+)") do
+		table.insert(path_parts, part)
+	end
+	if #path_parts < 4 or string.len(buf_path) * 4 < win_width then
+		return " " .. buf_path .. " 󰁕"
+	end
+
+	local mid_path = table.concat(path_parts, "/", 2, #path_parts - 1)
+	buf_path = path_parts[1] .. "/" .. vim.fn.pathshorten(mid_path, 1) .. "/" .. path_parts[#path_parts]
+	return " " .. buf_path .. " 󰁕"
+end
 -- Lualine config
 require("lualine").setup({
 	options = {
 		disabled_filetypes = {
 			statusline = { "neo-tree" },
-			winbar = {},
+			winbar = { "neo-tree", "qf" },
 		},
 		theme = "everforest",
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
 	},
+	extensions = { "quickfix" },
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = {
@@ -37,29 +53,35 @@ require("lualine").setup({
 			{
 				"tabs",
 				max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-				-- Note:
-				-- It can also be a function that returns
-				-- the value of `max_length` dynamically.
 				mode = 2,
-
-				-- -- Automatically updates active tab color to match color of other components (will be overidden if buffers_color is set)
-				-- use_mode_colors = false,
-				--
-				-- tabs_color = {
-				-- 	-- Same values as the general color option can be used here.
-				-- 	active = "lualine_{section}_normal", -- Color for active tab.
-				-- 	inactive = "lualine_{section}_inactive", -- Color for inactive tab.
-				-- },
-
-				-- fmt = function(name, context)
-				-- 	-- Show + if buffer is modified in tab
-				-- 	local buflist = vim.fn.tabpagebuflist(context.tabnr)
-				-- 	local winnr = vim.fn.tabpagewinnr(context.tabnr)
-				-- 	local bufnr = buflist[winnr]
-				-- 	local mod = vim.fn.getbufvar(bufnr, "&mod")
-				--
-				-- 	return name .. (mod == 1 and " +" or "")
-				-- end,
+			},
+		},
+	},
+	winbar = {
+		lualine_c = {
+			{
+				short_path,
+				color = "Normal",
+				draw_empty = true,
+			},
+			{
+				"navic",
+				separator = ">",
+				padding = 0,
+			},
+		},
+	},
+	inactive_winbar = {
+		lualine_c = {
+			{
+				short_path,
+				color = "Normal",
+				draw_empty = true,
+			},
+			{
+				"navic",
+				separator = ">",
+				padding = 0,
 			},
 		},
 	},

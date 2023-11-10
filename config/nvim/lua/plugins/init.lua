@@ -99,9 +99,24 @@ require("lazy").setup({
 	-- breadcrumbs
 	{
 		"Bekaboo/dropbar.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		config = function()
 			require("plugins.dropbar")
+		end,
+	},
+	{
+		"SmiteshP/nvim-navbuddy",
+		enabled = true,
+		event = "BufReadPre",
+		dependencies = {
+			{
+				"SmiteshP/nvim-navic",
+				"MunifTanjim/nui.nvim",
+			},
+		},
+		config = function()
+			require("plugins.navbuddy")
 		end,
 	},
 	-- todo list
@@ -265,13 +280,24 @@ require("lazy").setup({
 			require("plugins.diffview")
 		end,
 	},
-	-- fzf
+	-- fzf and quickfix
 	{
 		"ibhagwan/fzf-lua",
 		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("plugins.fzf")
+		end,
+	},
+	{
+		"kevinhwang91/nvim-bqf",
+		event = "VeryLazy",
+		ft = "qf",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("plugins.bqf")
 		end,
 	},
 	-- debug

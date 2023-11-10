@@ -9,6 +9,15 @@ local api = require("dropbar.api")
 local utils = require("dropbar.utils")
 
 dropbar.setup({
+	general = {
+		enable = function(buf, win)
+			return not vim.api.nvim_win_get_config(win).zindex
+				and vim.bo[buf].buftype == ""
+				and vim.api.nvim_buf_get_name(buf) ~= ""
+				and not vim.wo[win].diff
+				and vim.bo[buf].buftype ~= "qf"
+		end,
+	},
 	menu = {},
 })
 

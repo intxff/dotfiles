@@ -19,14 +19,19 @@ end
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+	-- keymaps
 	local opts = { buffer = bufnr }
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+	vim.keymap.set("n", "gi", vim.lsp.buf.incoming_calls, opts)
+	vim.keymap.set("n", "go", vim.lsp.buf.outgoing_calls, opts)
+	vim.keymap.set("n", "<space>i", vim.lsp.buf.implementation, opts)
 	vim.keymap.set("n", "<space>d", vim.lsp.buf.type_definition, opts)
 	vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, opts)
-	vim.keymap.set("n", "<space>i", function()
+	vim.keymap.set("n", "<space>I", function()
 		vim.lsp.inlay_hint(0, nil)
 	end, opts)
 	vim.keymap.set({ "n", "v" }, "<space>c", vim.lsp.buf.code_action, opts)
@@ -35,6 +40,14 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set("n", "<space>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, opts)
+
+	-- navic symbol
+	local navbuddy = require("nvim-navbuddy")
+	local navic = require("nvim-navic")
+	if client.server_capabilities.documentSymbolProvider then
+		navic.attach(client, bufnr)
+		navbuddy.attach(client, bufnr)
+	end
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
