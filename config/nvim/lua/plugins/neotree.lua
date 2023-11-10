@@ -34,6 +34,12 @@ require("neo-tree").setup({
 			}
 		end,
 	},
+	filesystem = {
+		use_libuv_file_watcher = true,
+		follow_current_file = {
+			enabled = false,
+		},
+	},
 })
 
 vim.keymap.set("n", "<space>n", "<CMD>Neotree toggle last<CR>", { silent = true })
