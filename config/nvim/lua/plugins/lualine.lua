@@ -13,76 +13,89 @@ local short_path = function()
 	buf_path = path_parts[1] .. "/" .. vim.fn.pathshorten(mid_path, 1) .. "/" .. path_parts[#path_parts]
 	return " " .. buf_path .. " 󰁕"
 end
--- Lualine config
-require("lualine").setup({
-	options = {
-		disabled_filetypes = {
-			statusline = { "neo-tree" },
-			winbar = { "neo-tree", "qf" },
-		},
-		theme = "everforest",
-		section_separators = { left = "", right = "" },
-		component_separators = { left = "", right = "" },
-	},
-	extensions = { "quickfix" },
-	sections = {
-		lualine_a = { "mode" },
-		lualine_b = {
-			"branch",
-			"diff",
-			{
-				"diagnostics",
-				sources = { "nvim_diagnostic", "nvim_lsp" },
+
+local function setup()
+	require("lualine").setup({
+		options = {
+			disabled_filetypes = {
+				statusline = { "neo-tree" },
+				winbar = { "neo-tree", "qf", "toggleterm" },
 			},
+			theme = "everforest",
+			section_separators = { left = "", right = "" },
+			component_separators = { left = "", right = "" },
 		},
-		lualine_c = { "filename" },
-		lualine_x = { "encoding", "fileformat", "filetype" },
-		lualine_y = { "progress" },
-		lualine_z = { "location" },
-	},
-	inactive_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = { "filename" },
-		lualine_x = { "location" },
-		lualine_y = {},
-		lualine_z = {},
-	},
-	tabline = {
-		lualine_a = {
-			{
-				"tabs",
-				max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-				mode = 2,
+		extensions = { "quickfix" },
+		sections = {
+			lualine_a = { "mode" },
+			lualine_b = {
+				"branch",
+				"diff",
+				{
+					"diagnostics",
+					sources = { "nvim_diagnostic", "nvim_lsp" },
+				},
 			},
+			lualine_c = { "filename" },
+			lualine_x = { "encoding", "fileformat", "filetype" },
+			lualine_y = { "progress" },
+			lualine_z = { "location" },
 		},
-	},
-	winbar = {
-		lualine_c = {
-			{
-				short_path,
-				color = "Normal",
-				draw_empty = true,
-			},
-			{
-				"navic",
-				separator = ">",
-				padding = 0,
+		inactive_sections = {
+			lualine_a = {},
+			lualine_b = {},
+			lualine_c = { "filename" },
+			lualine_x = { "location" },
+			lualine_y = {},
+			lualine_z = {},
+		},
+		tabline = {
+			lualine_a = {
+				{
+					"tabs",
+					max_length = vim.o.columns / 3, -- Maximum width of tabs component.
+					mode = 2,
+				},
 			},
 		},
-	},
-	inactive_winbar = {
-		lualine_c = {
-			{
-				short_path,
-				color = "Normal",
-				draw_empty = true,
-			},
-			{
-				"navic",
-				separator = ">",
-				padding = 0,
+		winbar = {
+			lualine_c = {
+				{
+					short_path,
+					color = "Normal",
+					draw_empty = true,
+				},
+				{
+					"navic",
+					separator = ">",
+					padding = 0,
+				},
 			},
 		},
+		inactive_winbar = {
+			lualine_c = {
+				{
+					short_path,
+					color = "Normal",
+					draw_empty = true,
+				},
+				{
+					"navic",
+					separator = ">",
+					padding = 0,
+				},
+			},
+		},
+	})
+end
+
+local M = {
+	"nvim-lualine/lualine.nvim",
+	event = "BufReadPre",
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
 	},
-})
+	config = setup,
+}
+
+return M

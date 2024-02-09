@@ -59,14 +59,14 @@ end
 vim.api.nvim_create_autocmd({ "FileType" }, { callback = changewrap })
 
 -- use capslock to replace esc in insert mode
-local function caps_to_esc()
-	os.execute("setxkbmap -option caps:escape")
-end
-local function caps_to_normal()
-	os.execute("setxkbmap -option")
-end
-vim.api.nvim_create_autocmd({ "InsertEnter" }, { callback = caps_to_esc })
-vim.api.nvim_create_autocmd({ "InsertLeave" }, { callback = caps_to_normal })
+-- local function caps_to_esc()
+-- 	os.execute("setxkbmap -option caps:escape")
+-- end
+-- local function caps_to_normal()
+-- 	os.execute("setxkbmap -option")
+-- end
+-- vim.api.nvim_create_autocmd({ "InsertEnter" }, { callback = caps_to_esc })
+-- vim.api.nvim_create_autocmd({ "InsertLeave" }, { callback = caps_to_normal })
 
 -- keymaps
 vim.g.mapleader = ";"

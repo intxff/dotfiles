@@ -1,2 +1,12 @@
 -- https://github.com/sindrets/diffview.nvim
-require("diffview").setup()
+local function setup()
+	require("diffview").setup()
+end
+
+local M = {
+	"sindrets/diffview.nvim",
+	event = "VeryLazy",
+	config = setup,
+}
+
+return M
