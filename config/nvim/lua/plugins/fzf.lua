@@ -20,6 +20,7 @@ local function setup()
 	local opts = { silent = true }
 
 	keymap("n", "<leader>f", fzf.files, opts)
+	keymap("n", "<leader>b", fzf.buffers, opts)
 	keymap("n", "<leader>a", "<cmd>FzfLua<cr>", opts)
 end
 

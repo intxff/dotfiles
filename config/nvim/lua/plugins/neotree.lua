@@ -17,8 +17,8 @@ local function setup()
 		close_if_last_window = true,
 		popup_border_style = "rounded",
 		source_selector = {
-			winbar = false,
-			statusline = true,
+			winbar = true,
+			statusline = false,
 		},
 		window = {
 			position = "left",

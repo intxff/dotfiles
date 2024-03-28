@@ -10,6 +10,7 @@ local M = {
 	dependencies = {
 		"mfussenegger/nvim-dap",
 		"williamboman/mason.nvim",
+		"nvim-neotest/nvim-nio",
 	},
 	config = setup,
 }

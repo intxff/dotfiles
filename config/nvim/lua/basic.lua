@@ -13,6 +13,10 @@ vim.opt.list = true
 -- vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
 
+-- statusline type
+-- vim.opt.laststatus = 3
+-- tabline never show
+vim.opt.showtabline = 0
 -- signcolumn always on
 vim.opt.signcolumn = "yes"
 

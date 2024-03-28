@@ -17,9 +17,10 @@ end
 local function setup()
 	require("lualine").setup({
 		options = {
+			globalstatus = true,
 			disabled_filetypes = {
-				statusline = { "neo-tree" },
-				winbar = { "neo-tree", "qf", "toggleterm" },
+				--statusline = { "neo-tree" },
+				winbar = { "neo-tree", "qf", "toggleterm", "help" },
 			},
 			theme = "everforest",
 			section_separators = { left = "", right = "" },
@@ -27,16 +28,23 @@ local function setup()
 		},
 		extensions = { "quickfix" },
 		sections = {
-			lualine_a = { "mode" },
-			lualine_b = {
+			lualine_a = {
+				{
+					"tabs",
+					mode = 0,
+					max_length = vim.o.columns / 10, -- Maximum width of tabs component.
+				},
+			},
+			lualine_b = { "mode" },
+			lualine_c = {
 				"branch",
 				"diff",
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic", "nvim_lsp" },
 				},
+				--"filename",
 			},
-			lualine_c = { "filename" },
 			lualine_x = { "encoding", "fileformat", "filetype" },
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
@@ -49,6 +57,7 @@ local function setup()
 			lualine_y = {},
 			lualine_z = {},
 		},
+		--[[
 		tabline = {
 			lualine_a = {
 				{
@@ -86,7 +95,10 @@ local function setup()
 				},
 			},
 		},
+    --]]
 	})
+	-- change preset lualine_a_tabs_active pink color to green
+	vim.cmd([[highlight! link lualine_a_tabs_active lualine_a_normal]])
 end
 
 local M = {

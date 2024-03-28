@@ -38,7 +38,7 @@ local function setup(plugin)
 	end)
 
 	require("ibl").setup({
-		indent = { highlight = highlight, char = "┃", tab_char = "┃" },
+		indent = { highlight = highlight, char = "│", tab_char = "│" },
 		whitespace = {
 			highlight = highlight,
 			remove_blankline_trail = false,
@@ -49,7 +49,7 @@ end
 
 local M = {
 	"lukas-reineke/indent-blankline.nvim",
-	tag = "v2.20.8",
+	--tag = "v2.20.8",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 	},

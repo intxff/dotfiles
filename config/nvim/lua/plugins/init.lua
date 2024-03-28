@@ -57,6 +57,7 @@ require("lazy").setup({
 	require("plugins.windows"),
 	require("plugins.flutter"),
 	require("plugins.toggleterm"),
+	require("plugins.incline"),
 }, {
 	defaults = {
 		lazy = true,
