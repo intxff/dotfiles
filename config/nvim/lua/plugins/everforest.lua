@@ -45,10 +45,11 @@ local function setup()
 	vim.api.nvim_set_hl(0, "DropBarMenuNormalFloat", raw_normal_float)
 end
 local M = {
-	"sainnhe/everforest",
+	--"sainnhe/everforest",
+	"intxff/everforest",
 	lazy = false,
 	priority = 1000,
-	event = "VeryLazy",
+	event = "BufReadPre",
 	config = setup,
 }
 

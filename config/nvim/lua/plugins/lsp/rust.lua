@@ -221,7 +221,7 @@ require("lspconfig").rust_analyzer.setup({
 				},
 				synchronization = {
 					didSave = true,
-					dynamicRegistration = false,
+					dynamicRegistration = true,
 					willSave = true,
 					willSaveWaitUntil = true,
 				},

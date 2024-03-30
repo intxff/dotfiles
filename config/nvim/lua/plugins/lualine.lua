@@ -29,15 +29,12 @@ local function setup()
 		extensions = { "quickfix" },
 		sections = {
 			lualine_a = {
-				{
-					"tabs",
-					mode = 0,
-					max_length = vim.o.columns / 10, -- Maximum width of tabs component.
-				},
+				"mode",
 			},
-			lualine_b = { "mode" },
-			lualine_c = {
+			lualine_b = {
 				"branch",
+			},
+			lualine_c = {
 				"diff",
 				{
 					"diagnostics",
